@@ -23,3 +23,6 @@ English, Latvian, Russian.
 seen selected announcements.
 6. Clients can leave reviews to announcements and to other
 clients (like rating for vendor).
+7. Client authorisation with social networks (Google, Facebook).
+8. Limits for clients on announcements per day/week.
+Unlockable/extendable by administrator.
