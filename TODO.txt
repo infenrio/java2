@@ -1,0 +1,25 @@
+Bulletin board
+1. Clients with registration and authorisation.
+2. Authorised clients can create/edit/delete their announcements.
+3. Authorised and not authorised clients can view announcements.
+4. Announcements have predefined categories to chose from.
+5. Announcements contain texts, some predefined fields and images.
+6. Announcements can be viewed in list by category
+and from category they can be viewed individually in more details.
+7. Administrators with registration and authorisation.
+8. Authorised administrator can ban users and announcements.
+9. Banned announcements and announcements of banned users
+are not available to be seen from announcement list.
+Additional features:
+1. Administrators can add new categories.
+2. Announcement list has additional filters, for example:
+amount, type (rent/sell), place, search.
+3. Layered categories, which means that category can have
+subcategories, ensure default category "other" if admin
+adds new subcategories.
+4. Three languages for interface and announcements:
+English, Latvian, Russian.
+5. Clients can create "wish list" to store previously
+seen selected announcements.
+6. Clients can leave reviews to announcements and to other
+clients (like rating for vendor).
