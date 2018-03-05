@@ -1,4 +1,4 @@
-package java2.database;
+package java2.models;
 
 public class User {
     private String login;

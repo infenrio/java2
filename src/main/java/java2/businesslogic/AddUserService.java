@@ -1,6 +1,6 @@
 package java2.businesslogic;
 
-import java2.database.User;
+import java2.models.User;
 import java2.database.UserDatabase;
 
 public class AddUserService {

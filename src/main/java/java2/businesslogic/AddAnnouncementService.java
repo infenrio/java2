@@ -1,8 +1,8 @@
 package java2.businesslogic;
 
-import java2.database.Announcement;
+import java2.models.Announcement;
 import java2.database.AnnouncementDatabase;
-import java2.database.User;
+import java2.models.User;
 import java2.database.UserDatabase;
 
 import java.util.Optional;

@@ -1,5 +1,8 @@
 package java2.database;
 
+import java2.models.Announcement;
+import java2.models.User;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

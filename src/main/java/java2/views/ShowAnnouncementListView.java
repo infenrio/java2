@@ -1,6 +1,6 @@
 package java2.views;
 
-import java2.database.Announcement;
+import java2.models.Announcement;
 import java2.database.AnnouncementDatabase;
 
 public class ShowAnnouncementListView implements View {

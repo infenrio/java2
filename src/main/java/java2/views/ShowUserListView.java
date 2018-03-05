@@ -1,6 +1,6 @@
 package java2.views;
 
-import java2.database.User;
+import java2.models.User;
 import java2.database.UserDatabase;
 
 public class ShowUserListView implements View {
