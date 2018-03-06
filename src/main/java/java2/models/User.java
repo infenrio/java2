@@ -4,6 +4,11 @@ public class User {
     private String login;
     private String name;
     private String email;
+    private UserState state;
+
+    public User() {
+        this.state = UserState.ACTIVE;
+    }
 
     public String getLogin() {
         return login;
@@ -29,6 +34,18 @@ public class User {
         this.email = email;
     }
 
+    public UserState getState() {
+        return state;
+    }
+
+    public void setState(UserState state) {
+        this.state = state;
+    }
+
+    public void ban() {
+        state = UserState.BANNED;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -38,7 +55,8 @@ public class User {
 
         if (!login.equals(user.login)) return false;
         if (!name.equals(user.name)) return false;
-        return email.equals(user.email);
+        if (!email.equals(user.email)) return false;
+        return state == user.state;
     }
 
     @Override
@@ -46,6 +64,7 @@ public class User {
         int result = login.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + email.hashCode();
+        result = 31 * result + state.hashCode();
         return result;
     }
 
@@ -55,6 +74,7 @@ public class User {
                 "login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", state=" + state.getStateText() +
                 '}';
     }
 }
