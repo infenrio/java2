@@ -1,7 +1,9 @@
 package java2.database;
 
 import java2.models.Announcement;
+import java2.models.AnnouncementState;
 import java2.models.User;
+import java2.models.UserState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,5 +37,13 @@ public class AnnouncementInMemoryDatabase implements AnnouncementDatabase {
         List<Announcement> allAnnouncements = new ArrayList<>();
         allAnnouncements.addAll(announcements);
         return allAnnouncements;
+    }
+
+    @Override
+    public List<Announcement> getValidAnnouncements() {
+        return announcements.stream()
+                .filter(a -> !a.getState().equals(AnnouncementState.BANNED))
+                .filter(a -> !a.getCreator().getState().equals(UserState.BANNED))
+                .collect(Collectors.toList());
     }
 }

@@ -14,4 +14,6 @@ public interface AnnouncementDatabase {
     Optional<Announcement> findByTitle(String title);
 
     List<Announcement> getAllAnnouncements();
+
+    List<Announcement> getValidAnnouncements();
 }

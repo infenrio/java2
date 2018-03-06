@@ -20,6 +20,8 @@ public class Application {
         View showUserListView = new ShowUserListView(userDatabase);
         View showAnnouncementListView = new ShowAnnouncementListView(announcementDatabase);
         View banAnnouncementView = new BanAnnouncementView(announcementDatabase);
+        View banUserView = new BanUserView(userDatabase);
+        View showValidAnnouncementsView = new ShowValidAnnouncementsView(announcementDatabase);
         View programExitView = new ProgramExitView();
 
         Map<Integer, View> actionMap = new HashMap<>();
@@ -28,7 +30,9 @@ public class Application {
         actionMap.put(3, showUserListView);
         actionMap.put(4, showAnnouncementListView);
         actionMap.put(5, banAnnouncementView);
-        actionMap.put(6, programExitView);
+        actionMap.put(6, banUserView);
+        actionMap.put(7, showValidAnnouncementsView);
+        actionMap.put(8, programExitView);
 
         while (true) {
             printProgramMenu();
@@ -45,7 +49,9 @@ public class Application {
         System.out.println("3. Show all users.");
         System.out.println("4. Show all announcements.");
         System.out.println("5. Ban announcement.");
-        System.out.println("6. Exit program.");
+        System.out.println("6. Ban user.");
+        System.out.println("7. Show only valid announcements.");
+        System.out.println("8. Exit program.");
     }
 
     private static int getFromUserMenuItemToExecute() {
