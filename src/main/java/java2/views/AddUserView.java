@@ -1,6 +1,8 @@
 package java2.views;
 
-import java2.businesslogic.AddUserService;
+import java2.businesslogic.ServiceResponse;
+import java2.businesslogic.adduser.AddUserService;
+import java2.businesslogic.adduser.AddUserValidator;
 import java2.database.UserDatabase;
 
 import java.util.Scanner;
@@ -9,7 +11,8 @@ public class AddUserView implements View {
     private AddUserService addUserService;
 
     public AddUserView(UserDatabase userDatabase) {
-        this.addUserService = new AddUserService(userDatabase);
+        AddUserValidator addUserValidator = new AddUserValidator(userDatabase);
+        this.addUserService = new AddUserService(userDatabase, addUserValidator);
     }
 
 
@@ -23,12 +26,14 @@ public class AddUserView implements View {
         String name = sc.nextLine();
         System.out.print("Enter email:");
         String email = sc.nextLine();
-
-        boolean result = addUserService.addUser(login, name, email);
-        if(result) {
-            System.out.println("User '" + login + "' sucessfully registered!");
+        ServiceResponse response = addUserService.addUser(login, name, email);
+        if(response.isSuccess()) {
+            System.out.println("User '" + login + "' successfully registered!");
         } else {
-            System.out.println("User '" + login + "' already exists!");
+            response.getErrors().forEach(error -> {
+                System.out.println("ValidationError field = " + error.getField());
+                System.out.println("ValidationError message = " + error.getErrorMessage());
+            });
         }
     }
 }

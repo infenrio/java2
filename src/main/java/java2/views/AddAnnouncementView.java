@@ -1,6 +1,8 @@
 package java2.views;
 
-import java2.businesslogic.AddAnnouncementService;
+import java2.businesslogic.ServiceResponse;
+import java2.businesslogic.addannouncement.AddAnnouncementService;
+import java2.businesslogic.addannouncement.AddAnnouncementValidator;
 import java2.database.AnnouncementDatabase;
 import java2.database.UserDatabase;
 
@@ -10,7 +12,9 @@ public class AddAnnouncementView implements View {
     private AddAnnouncementService addAnnouncementService;
 
     public AddAnnouncementView(AnnouncementDatabase announcementDatabase, UserDatabase userDatabase) {
-        this.addAnnouncementService = new AddAnnouncementService(announcementDatabase, userDatabase);
+        AddAnnouncementValidator addAnnouncementValidator = new AddAnnouncementValidator(announcementDatabase, userDatabase);
+        this.addAnnouncementService = new AddAnnouncementService(announcementDatabase, userDatabase,
+                addAnnouncementValidator);
     }
 
     @Override
@@ -23,11 +27,14 @@ public class AddAnnouncementView implements View {
         String title = sc.nextLine();
         System.out.print("Enter description:");
         String description = sc.nextLine();
-        boolean result = addAnnouncementService.addAnnouncement(login, title, description);
-        if(result) {
+        ServiceResponse response = addAnnouncementService.addAnnouncement(login, title, description);
+        if(response.isSuccess()) {
             System.out.println("Announcement '" + title + "' from user '" + login + "' successfully registered!");
         } else {
-            System.out.println("User '" + login + "' does not exist, announcement was not created!");
+            response.getErrors().forEach(error -> {
+                System.out.println("ValidationError field = " + error.getField());
+                System.out.println("ValidationError message = " + error.getErrorMessage());
+            });
         }
     }
 }

@@ -10,5 +10,7 @@ public interface UserDatabase {
 
     Optional<User> findByLogin(String login);
 
+    Optional<User> findByEmail(String email);
+
     List<User> getAllUsers();
 }

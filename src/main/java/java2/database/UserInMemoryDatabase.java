@@ -22,6 +22,13 @@ public class UserInMemoryDatabase implements UserDatabase {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        return users.stream()
+                .filter(u -> u.getEmail().equals(email))
+                .findFirst();
+    }
+
+    @Override
     public List<User> getAllUsers() {
         List<User> allUsers = new ArrayList<>();
         allUsers.addAll(users);

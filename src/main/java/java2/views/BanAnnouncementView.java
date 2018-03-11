@@ -1,6 +1,8 @@
 package java2.views;
 
-import java2.businesslogic.BanAnnouncementService;
+import java2.businesslogic.ServiceResponse;
+import java2.businesslogic.banannouncement.BanAnnouncementService;
+import java2.businesslogic.banannouncement.BanAnnouncementValidator;
 import java2.database.AnnouncementDatabase;
 
 import java.util.Scanner;
@@ -9,7 +11,8 @@ public class BanAnnouncementView implements View {
     private BanAnnouncementService banAnnouncementService;
 
     public BanAnnouncementView(AnnouncementDatabase announcementDatabase) {
-        banAnnouncementService = new BanAnnouncementService(announcementDatabase);
+        BanAnnouncementValidator banAnnouncementValidator = new BanAnnouncementValidator(announcementDatabase);
+        banAnnouncementService = new BanAnnouncementService(announcementDatabase, banAnnouncementValidator);
     }
 
     @Override
@@ -20,7 +23,14 @@ public class BanAnnouncementView implements View {
         String login = sc.nextLine();
         System.out.print("Enter title:");
         String title = sc.nextLine();
-        String result = banAnnouncementService.banAnnouncement(login, title);
-        System.out.println(result);
+        ServiceResponse response = banAnnouncementService.banAnnouncement(login, title);
+        if(response.isSuccess()) {
+            System.out.println("Announcement successfully banned!");
+        } else {
+            response.getErrors().forEach(error -> {
+                System.out.println("ValidationError field = " + error.getField());
+                System.out.println("ValidationError message = " + error.getErrorMessage());
+            });
+        }
     }
 }
