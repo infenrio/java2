@@ -8,9 +8,13 @@ import java.util.Optional;
 public interface UserDatabase {
     void add(User user);
 
+    Optional<User> findById(int id);
+
     Optional<User> findByLogin(String login);
 
     Optional<User> findByEmail(String email);
 
     List<User> getAllUsers();
+
+    void banUser(User user);
 }

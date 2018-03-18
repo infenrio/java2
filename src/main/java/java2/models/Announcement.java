@@ -1,13 +1,22 @@
 package java2.models;
 
 public class Announcement {
+    private int id;
     private User creator;
     private String title;
     private String description;
-    private AnnouncementState state;
+    private String state;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Announcement() {
-        this.state = AnnouncementState.ACTIVE;
+        this.state = "ACTIVE";
     }
 
     public User getCreator() {
@@ -30,11 +39,11 @@ public class Announcement {
         return description;
     }
 
-    public AnnouncementState getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(AnnouncementState state) {
+    public void setState(String state) {
         this.state = state;
     }
 
@@ -43,7 +52,7 @@ public class Announcement {
     }
 
     public void ban() {
-        state = AnnouncementState.BANNED;
+        state = "BANNED";
     }
 
     @Override
@@ -53,15 +62,17 @@ public class Announcement {
 
         Announcement that = (Announcement) o;
 
+        if (id != that.id) return false;
         if (!creator.equals(that.creator)) return false;
         if (!title.equals(that.title)) return false;
         if (!description.equals(that.description)) return false;
-        return state == that.state;
+        return state.equals(that.state);
     }
 
     @Override
     public int hashCode() {
-        int result = creator.hashCode();
+        int result = id;
+        result = 31 * result + creator.hashCode();
         result = 31 * result + title.hashCode();
         result = 31 * result + description.hashCode();
         result = 31 * result + state.hashCode();
@@ -74,7 +85,7 @@ public class Announcement {
                 "creator=" + creator +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", state='" + state.getStateText() + '\'' +
+                ", state='" + state + '\'' +
                 '}';
     }
 }

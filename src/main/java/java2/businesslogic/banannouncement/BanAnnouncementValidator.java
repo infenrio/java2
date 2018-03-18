@@ -63,7 +63,7 @@ public class BanAnnouncementValidator {
     private Optional<ValidationError> validateAnnouncementAlreadyBanned(String title) {
         Optional<Announcement> foundAnnouncement = announcementDatabase.findByTitle(title);
         if(foundAnnouncement.isPresent()) {
-            if(foundAnnouncement.get().getState().equals(AnnouncementState.BANNED)) {
+            if(foundAnnouncement.get().getState().equals("BANNED")) {
                 return Optional.of(new ValidationError("title", "Announcement already banned!"));
             } else {
                 return Optional.empty();

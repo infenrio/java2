@@ -16,4 +16,6 @@ public interface AnnouncementDatabase {
     List<Announcement> getAllAnnouncements();
 
     List<Announcement> getValidAnnouncements();
+
+    void banAnnouncement(Announcement announcement);
 }

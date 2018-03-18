@@ -47,7 +47,7 @@ public class BanUserValidatorTest {
         Mockito.when(userDatabase.findByLogin("login")).
                 thenReturn(Optional.of(user));
         Mockito.when(Optional.of(user).get().getState())
-                .thenReturn(UserState.BANNED);
+                .thenReturn("BANNED");
         List<ValidationError> errors = validator.validate("login");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "login");
@@ -60,7 +60,7 @@ public class BanUserValidatorTest {
         Mockito.when(userDatabase.findByLogin("login")).
                 thenReturn(Optional.of(user));
         Mockito.when(Optional.of(user).get().getState())
-                .thenReturn(UserState.ACTIVE);
+                .thenReturn("ACTIVE");
         List<ValidationError> errors = validator.validate("login");
         assertEquals(errors.size(), 0);
     }

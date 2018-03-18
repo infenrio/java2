@@ -23,7 +23,7 @@ public class BanUserService {
             return new ServiceResponse(false, validationErrors);
         } else {
             Optional<User> foundUser = userDatabase.findByLogin(login);
-            foundUser.get().ban();
+            userDatabase.banUser(foundUser.get());
             return new ServiceResponse(true, null);
         }
     }

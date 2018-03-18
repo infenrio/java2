@@ -46,4 +46,9 @@ public class AnnouncementInMemoryDatabase implements AnnouncementDatabase {
                 .filter(a -> !a.getCreator().getState().equals(UserState.BANNED))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void banAnnouncement(Announcement announcement) {
+        announcement.ban();
+    }
 }

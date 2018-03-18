@@ -30,7 +30,7 @@ public class BanAnnouncementValidatorTest {
         Mockito.when(announcementDatabase.findByTitle("title")).
                 thenReturn(Optional.of(announcement));
         Mockito.when(Optional.of(announcement).get().getState())
-                .thenReturn(AnnouncementState.ACTIVE);
+                .thenReturn("ACTIVE");
         List<ValidationError> errors = validator.validate(null, "title");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "login");
@@ -65,7 +65,7 @@ public class BanAnnouncementValidatorTest {
                 .thenReturn(user);
         Mockito.when(user.getLogin()).thenReturn("login");
         Mockito.when(Optional.of(announcement).get().getState())
-                .thenReturn(AnnouncementState.BANNED);
+                .thenReturn("BANNED");
         List<ValidationError> errors = validator.validate("login", "title");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "title");
@@ -82,7 +82,7 @@ public class BanAnnouncementValidatorTest {
                 .thenReturn(user);
         Mockito.when(user.getLogin()).thenReturn("login2");
         Mockito.when(Optional.of(announcement).get().getState())
-                .thenReturn(AnnouncementState.ACTIVE);
+                .thenReturn("ACTIVE");
         List<ValidationError> errors = validator.validate("login", "title");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "login");
@@ -99,7 +99,7 @@ public class BanAnnouncementValidatorTest {
                 .thenReturn(user);
         Mockito.when(user.getLogin()).thenReturn("login");
         Mockito.when(Optional.of(announcement).get().getState())
-                .thenReturn(AnnouncementState.ACTIVE);
+                .thenReturn("ACTIVE");
         List<ValidationError> errors = validator.validate("login", "title");
         assertEquals(errors.size(), 0);
     }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 
 public class BanAnnouncementServiceTest {
     private AnnouncementDatabase announcementDatabase;
@@ -37,7 +38,7 @@ public class BanAnnouncementServiceTest {
         ServiceResponse response = service.banAnnouncement("login", "title");
         assertEquals(response.isSuccess(), true);
         assertEquals(response.getErrors(), null);
-        Mockito.verify(announcement).ban();
+        Mockito.verify(announcementDatabase).banAnnouncement(any(Announcement.class));
     }
 
     @Test

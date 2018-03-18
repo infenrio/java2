@@ -15,6 +15,13 @@ public class UserInMemoryDatabase implements UserDatabase {
     }
 
     @Override
+    public Optional<User> findById(int id) {
+        return users.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst();
+    }
+
+    @Override
     public Optional<User> findByLogin(String login) {
         return users.stream()
                 .filter(u -> u.getLogin().equals(login))
@@ -34,4 +41,11 @@ public class UserInMemoryDatabase implements UserDatabase {
         allUsers.addAll(users);
         return allUsers;
     }
+
+    @Override
+    public void banUser(User user) {
+        user.ban();
+    }
+
+
 }

@@ -1,13 +1,22 @@
 package java2.models;
 
 public class User {
+    private int id;
     private String login;
     private String name;
     private String email;
-    private UserState state;
+    private String state;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public User() {
-        this.state = UserState.ACTIVE;
+        this.state = "ACTIVE";
     }
 
     public String getLogin() {
@@ -34,16 +43,16 @@ public class User {
         this.email = email;
     }
 
-    public UserState getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(UserState state) {
+    public void setState(String state) {
         this.state = state;
     }
 
     public void ban() {
-        state = UserState.BANNED;
+        state = "BANNED";
     }
 
     @Override
@@ -53,15 +62,17 @@ public class User {
 
         User user = (User) o;
 
+        if (id != user.id) return false;
         if (!login.equals(user.login)) return false;
         if (!name.equals(user.name)) return false;
         if (!email.equals(user.email)) return false;
-        return state == user.state;
+        return state.equals(user.state);
     }
 
     @Override
     public int hashCode() {
-        int result = login.hashCode();
+        int result = id;
+        result = 31 * result + login.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + state.hashCode();
@@ -74,7 +85,7 @@ public class User {
                 "login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", state=" + state.getStateText() +
+                ", state=" + state +
                 '}';
     }
 }

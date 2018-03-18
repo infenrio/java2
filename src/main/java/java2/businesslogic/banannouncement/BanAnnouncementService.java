@@ -25,7 +25,7 @@ public class BanAnnouncementService {
             return new ServiceResponse(false, validationErrors);
         } else {
             Optional<Announcement> foundAnnouncement = announcementDatabase.findByTitle(title);
-            foundAnnouncement.get().ban();
+            announcementDatabase.banAnnouncement(foundAnnouncement.get());
             return new ServiceResponse(true, null);
         }
     }

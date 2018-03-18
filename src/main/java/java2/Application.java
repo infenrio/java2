@@ -1,9 +1,6 @@
 package java2;
 
-import java2.database.AnnouncementDatabase;
-import java2.database.AnnouncementInMemoryDatabase;
-import java2.database.UserDatabase;
-import java2.database.UserInMemoryDatabase;
+import java2.database.*;
 import java2.views.*;
 
 import java.util.HashMap;
@@ -12,8 +9,8 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        UserDatabase userDatabase = new UserInMemoryDatabase();
-        AnnouncementDatabase announcementDatabase = new AnnouncementInMemoryDatabase();
+        UserDatabase userDatabase = new UserRealDatabase();
+        AnnouncementDatabase announcementDatabase = new AnnouncementRealDatabase(userDatabase);
 
         View addUserView = new AddUserView(userDatabase);
         View addAnnouncementView = new AddAnnouncementView(announcementDatabase, userDatabase);

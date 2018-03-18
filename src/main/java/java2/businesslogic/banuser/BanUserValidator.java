@@ -49,7 +49,7 @@ public class BanUserValidator {
     private Optional<ValidationError> validateUserAlreadyBanned(String login) {
         Optional<User> userFound = userDatabase.findByLogin(login);
         if(userFound.isPresent()) {
-            if(userFound.get().getState().equals(UserState.BANNED)) {
+            if(userFound.get().getState().equals("BANNED")) {
                 return Optional.of(new ValidationError("login", "User already banned!"));
             } else {
                 return Optional.empty();
