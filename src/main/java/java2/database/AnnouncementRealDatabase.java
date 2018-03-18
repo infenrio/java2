@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AnnouncementRealDatabase extends JDBCDatabase implements AnnouncementDatabase {
-    UserDatabase userDatabase;
+    private UserDatabase userDatabase;
 
     public AnnouncementRealDatabase(UserDatabase userDatabase) {
         this.userDatabase = userDatabase;
