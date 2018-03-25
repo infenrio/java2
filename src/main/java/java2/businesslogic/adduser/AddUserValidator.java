@@ -3,11 +3,13 @@ package java2.businesslogic.adduser;
 import java2.businesslogic.ValidationError;
 import java2.database.UserDatabase;
 import java2.models.User;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AddUserValidator {
     private UserDatabase userDatabase;
 

@@ -4,16 +4,14 @@ import java2.businesslogic.ServiceResponse;
 import java2.businesslogic.banannouncement.BanAnnouncementService;
 import java2.businesslogic.banannouncement.BanAnnouncementValidator;
 import java2.database.AnnouncementDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class BanAnnouncementView implements View {
-    private BanAnnouncementService banAnnouncementService;
-
-    public BanAnnouncementView(AnnouncementDatabase announcementDatabase) {
-        BanAnnouncementValidator banAnnouncementValidator = new BanAnnouncementValidator(announcementDatabase);
-        banAnnouncementService = new BanAnnouncementService(announcementDatabase, banAnnouncementValidator);
-    }
+    @Autowired private BanAnnouncementService banAnnouncementService;
 
     @Override
     public void execute() {

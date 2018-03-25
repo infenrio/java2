@@ -4,11 +4,13 @@ import java2.businesslogic.ValidationError;
 import java2.database.AnnouncementDatabase;
 import java2.models.Announcement;
 import java2.models.AnnouncementState;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class BanAnnouncementValidator {
     private AnnouncementDatabase announcementDatabase;
 

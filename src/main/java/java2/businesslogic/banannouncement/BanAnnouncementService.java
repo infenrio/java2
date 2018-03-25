@@ -6,10 +6,12 @@ import java2.database.AnnouncementDatabase;
 import java2.database.UserDatabase;
 import java2.models.Announcement;
 import java2.models.AnnouncementState;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class BanAnnouncementService {
     private AnnouncementDatabase announcementDatabase;
     private BanAnnouncementValidator banAnnouncementValidator;

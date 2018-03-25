@@ -6,17 +6,19 @@ import java2.models.Announcement;
 import java2.database.AnnouncementDatabase;
 import java2.models.User;
 import java2.database.UserDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AddAnnouncementService {
     private AnnouncementDatabase announcementDatabase;
     private UserDatabase userDatabase;
     private AddAnnouncementValidator addAnnouncementValidator;
 
-    public AddAnnouncementService(AnnouncementDatabase announcementDatabase, UserDatabase userDatabase,
-                                  AddAnnouncementValidator addAnnouncementValidator) {
+    public AddAnnouncementService(AnnouncementDatabase announcementDatabase, UserDatabase userDatabase, AddAnnouncementValidator addAnnouncementValidator) {
         this.announcementDatabase = announcementDatabase;
         this.userDatabase = userDatabase;
         this.addAnnouncementValidator = addAnnouncementValidator;

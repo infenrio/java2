@@ -4,10 +4,13 @@ import java2.businesslogic.ValidationError;
 import java2.businesslogic.ServiceResponse;
 import java2.database.UserDatabase;
 import java2.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class BanUserService {
     private UserDatabase userDatabase;
     private BanUserValidator banUserValidator;

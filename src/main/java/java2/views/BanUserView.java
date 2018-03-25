@@ -4,16 +4,14 @@ import java2.businesslogic.ServiceResponse;
 import java2.businesslogic.banuser.BanUserService;
 import java2.businesslogic.banuser.BanUserValidator;
 import java2.database.UserDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class BanUserView implements View {
-    private BanUserService banUserService;
-
-    public BanUserView(UserDatabase userDatabase) {
-        BanUserValidator banUserValidator = new BanUserValidator(userDatabase);
-        banUserService = new BanUserService(userDatabase, banUserValidator);
-    }
+    @Autowired private BanUserService banUserService;
 
     @Override
     public void execute() {

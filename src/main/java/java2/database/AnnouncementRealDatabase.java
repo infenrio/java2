@@ -2,6 +2,7 @@ package java2.database;
 
 import java2.models.Announcement;
 import java2.models.User;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class AnnouncementRealDatabase extends JDBCDatabase implements AnnouncementDatabase {
     private UserDatabase userDatabase;
 

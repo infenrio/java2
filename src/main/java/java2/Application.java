@@ -1,7 +1,10 @@
 package java2;
 
+import java2.configs.SpringAppConfig;
 import java2.database.*;
 import java2.views.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,27 +12,18 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        UserDatabase userDatabase = new UserRealDatabase();
-        AnnouncementDatabase announcementDatabase = new AnnouncementRealDatabase(userDatabase);
-
-        View addUserView = new AddUserView(userDatabase);
-        View addAnnouncementView = new AddAnnouncementView(announcementDatabase, userDatabase);
-        View showUserListView = new ShowUserListView(userDatabase);
-        View showAnnouncementListView = new ShowAnnouncementListView(announcementDatabase);
-        View banAnnouncementView = new BanAnnouncementView(announcementDatabase);
-        View banUserView = new BanUserView(userDatabase);
-        View showValidAnnouncementsView = new ShowValidAnnouncementsView(announcementDatabase);
-        View programExitView = new ProgramExitView();
+        ApplicationContext applicationContext
+                = new AnnotationConfigApplicationContext(SpringAppConfig.class);
 
         Map<Integer, View> actionMap = new HashMap<>();
-        actionMap.put(1, addUserView);
-        actionMap.put(2, addAnnouncementView);
-        actionMap.put(3, showUserListView);
-        actionMap.put(4, showAnnouncementListView);
-        actionMap.put(5, banAnnouncementView);
-        actionMap.put(6, banUserView);
-        actionMap.put(7, showValidAnnouncementsView);
-        actionMap.put(8, programExitView);
+        actionMap.put(1, applicationContext.getBean(AddUserView.class));
+        actionMap.put(2, applicationContext.getBean(AddAnnouncementView.class));
+        actionMap.put(3, applicationContext.getBean(ShowUserListView.class));
+        actionMap.put(4, applicationContext.getBean(ShowAnnouncementListView.class));
+        actionMap.put(5, applicationContext.getBean(BanAnnouncementView.class));
+        actionMap.put(6, applicationContext.getBean(BanUserView.class));
+        actionMap.put(7, applicationContext.getBean(ShowValidAnnouncementsView.class));
+        actionMap.put(8, applicationContext.getBean(ProgramExitView.class));
 
         while (true) {
             printProgramMenu();

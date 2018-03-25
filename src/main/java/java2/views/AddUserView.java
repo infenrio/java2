@@ -4,17 +4,14 @@ import java2.businesslogic.ServiceResponse;
 import java2.businesslogic.adduser.AddUserService;
 import java2.businesslogic.adduser.AddUserValidator;
 import java2.database.UserDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class AddUserView implements View {
-    private AddUserService addUserService;
-
-    public AddUserView(UserDatabase userDatabase) {
-        AddUserValidator addUserValidator = new AddUserValidator(userDatabase);
-        this.addUserService = new AddUserService(userDatabase, addUserValidator);
-    }
-
+    @Autowired private AddUserService addUserService;
 
     @Override
     public void execute() {

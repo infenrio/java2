@@ -5,17 +5,14 @@ import java2.businesslogic.addannouncement.AddAnnouncementService;
 import java2.businesslogic.addannouncement.AddAnnouncementValidator;
 import java2.database.AnnouncementDatabase;
 import java2.database.UserDatabase;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
+@Component
 public class AddAnnouncementView implements View {
-    private AddAnnouncementService addAnnouncementService;
-
-    public AddAnnouncementView(AnnouncementDatabase announcementDatabase, UserDatabase userDatabase) {
-        AddAnnouncementValidator addAnnouncementValidator = new AddAnnouncementValidator(announcementDatabase, userDatabase);
-        this.addAnnouncementService = new AddAnnouncementService(announcementDatabase, userDatabase,
-                addAnnouncementValidator);
-    }
+    @Autowired private AddAnnouncementService addAnnouncementService;
 
     @Override
     public void execute() {

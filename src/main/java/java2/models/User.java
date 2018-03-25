@@ -1,11 +1,14 @@
 package java2.models;
 
+import java.util.Date;
+
 public class User {
     private int id;
     private String login;
     private String name;
     private String email;
     private String state;
+    private Date createdDate;
 
     public int getId() {
         return id;
@@ -55,6 +58,14 @@ public class User {
         state = "BANNED";
     }
 
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,7 +77,8 @@ public class User {
         if (!login.equals(user.login)) return false;
         if (!name.equals(user.name)) return false;
         if (!email.equals(user.email)) return false;
-        return state.equals(user.state);
+        if (!state.equals(user.state)) return false;
+        return createdDate.equals(user.createdDate);
     }
 
     @Override
@@ -76,6 +88,7 @@ public class User {
         result = 31 * result + name.hashCode();
         result = 31 * result + email.hashCode();
         result = 31 * result + state.hashCode();
+        result = 31 * result + createdDate.hashCode();
         return result;
     }
 

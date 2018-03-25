@@ -4,9 +4,11 @@ import java2.businesslogic.ValidationError;
 import java2.businesslogic.ServiceResponse;
 import java2.models.User;
 import java2.database.UserDatabase;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class AddUserService {
     private UserDatabase userDatabase;
     private AddUserValidator addUserValidator;

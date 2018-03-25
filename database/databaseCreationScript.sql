@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `name` CHAR(100) NOT NULL,
   `email` CHAR(100) NOT NULL,
   `state_idref` CHAR(10) NOT NULL,
+  `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`login`),
   FOREIGN KEY (`state_idref`) REFERENCES `user_state`(`id`)
