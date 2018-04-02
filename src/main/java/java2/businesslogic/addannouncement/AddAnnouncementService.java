@@ -14,15 +14,9 @@ import java.util.Optional;
 
 @Component
 public class AddAnnouncementService {
-    private AnnouncementDatabase announcementDatabase;
-    private UserDatabase userDatabase;
-    private AddAnnouncementValidator addAnnouncementValidator;
-
-    public AddAnnouncementService(AnnouncementDatabase announcementDatabase, UserDatabase userDatabase, AddAnnouncementValidator addAnnouncementValidator) {
-        this.announcementDatabase = announcementDatabase;
-        this.userDatabase = userDatabase;
-        this.addAnnouncementValidator = addAnnouncementValidator;
-    }
+    @Autowired private AnnouncementDatabase announcementDatabase;
+    @Autowired private UserDatabase userDatabase;
+    @Autowired private AddAnnouncementValidator addAnnouncementValidator;
 
     public ServiceResponse addAnnouncement(String login, String title, String description) {
         List<ValidationError> validationErrors = addAnnouncementValidator.validate(login, title, description);

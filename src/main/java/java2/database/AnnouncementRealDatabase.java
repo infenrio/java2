@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class AnnouncementRealDatabase extends JDBCDatabase implements AnnouncementDatabase {
     private UserDatabase userDatabase;
 

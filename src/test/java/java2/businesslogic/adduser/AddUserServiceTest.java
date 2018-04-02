@@ -6,7 +6,11 @@ import java2.database.UserDatabase;
 import java2.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,26 +19,20 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AddUserServiceTest {
-    private UserDatabase userDatabase;
-    private AddUserValidator validator;
-    private AddUserService service;
+    @Mock private UserDatabase userDatabase;
+    @Mock private AddUserValidator validator;
 
-    @Before
-    public void init() {
-        userDatabase = Mockito.mock(UserDatabase.class);
-        validator = Mockito.mock(AddUserValidator.class);
-        service = new AddUserService(userDatabase, validator);
-    }
+    @InjectMocks
+    private AddUserService service = new AddUserService();
 
     @Test
     public void shouldReturnSuccess() {
         List<ValidationError> errors = new ArrayList<>();
-        Mockito.when(validator.validate("login", "name", "email")).
+        Mockito.when(validator.validate("login", "password", "name", "email")).
                 thenReturn(errors);
-        Mockito.when(userDatabase.findByLogin("login")).
-                thenReturn(Optional.empty());
-        ServiceResponse response = service.addUser("login", "name", "email");
+        ServiceResponse response = service.addUser("login", "password", "name", "email");
         assertEquals(response.isSuccess(), true);
         assertEquals(response.getErrors(), null);
         Mockito.verify(userDatabase).add(any(User.class));
@@ -44,11 +42,9 @@ public class AddUserServiceTest {
     public void shouldReturnFail() {
         List<ValidationError> errors = new ArrayList<>();
         errors.add(new ValidationError("field", "ValidationError message"));
-        Mockito.when(validator.validate(null, "name", "email")).
+        Mockito.when(validator.validate(null, "password", "name", "email")).
                 thenReturn(errors);
-        Mockito.when(userDatabase.findByLogin("login")).
-                thenReturn(Optional.empty());
-        ServiceResponse response = service.addUser(null, "name", "email");
+        ServiceResponse response = service.addUser(null, "password", "name", "email");
         assertEquals(response.isSuccess(), false);
         assertEquals(response.getErrors(), errors);
         Mockito.verifyZeroInteractions(userDatabase);

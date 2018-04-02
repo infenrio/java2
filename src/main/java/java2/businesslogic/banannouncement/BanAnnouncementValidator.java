@@ -4,6 +4,7 @@ import java2.businesslogic.ValidationError;
 import java2.database.AnnouncementDatabase;
 import java2.models.Announcement;
 import java2.models.AnnouncementState;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,11 +13,7 @@ import java.util.Optional;
 
 @Component
 public class BanAnnouncementValidator {
-    private AnnouncementDatabase announcementDatabase;
-
-    public BanAnnouncementValidator(AnnouncementDatabase announcementDatabase) {
-        this.announcementDatabase = announcementDatabase;
-    }
+    @Autowired private AnnouncementDatabase announcementDatabase;
 
     public List<ValidationError> validate(String login, String title) {
         List<ValidationError> errors = new ArrayList<>();

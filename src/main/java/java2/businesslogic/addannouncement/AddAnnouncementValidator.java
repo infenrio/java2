@@ -14,13 +14,8 @@ import java.util.Optional;
 
 @Component
 public class AddAnnouncementValidator {
-    private AnnouncementDatabase announcementDatabase;
-    private UserDatabase userDatabase;
-
-    public AddAnnouncementValidator(AnnouncementDatabase announcementDatabase, UserDatabase userDatabase) {
-        this.announcementDatabase = announcementDatabase;
-        this.userDatabase = userDatabase;
-    }
+    @Autowired private AnnouncementDatabase announcementDatabase;
+    @Autowired private UserDatabase userDatabase;
 
     public List<ValidationError> validate(String login, String title, String description) {
         List<ValidationError> errors = new ArrayList<>();

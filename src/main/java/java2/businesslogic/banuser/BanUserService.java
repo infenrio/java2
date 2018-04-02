@@ -12,13 +12,8 @@ import java.util.Optional;
 
 @Component
 public class BanUserService {
-    private UserDatabase userDatabase;
-    private BanUserValidator banUserValidator;
-
-    public BanUserService(UserDatabase userDatabase, BanUserValidator banUserValidator) {
-        this.userDatabase = userDatabase;
-        this.banUserValidator = banUserValidator;
-    }
+    @Autowired private UserDatabase userDatabase;
+    @Autowired private BanUserValidator banUserValidator;
 
     public ServiceResponse banUser(String login) {
         List<ValidationError> validationErrors = banUserValidator.validate(login);

@@ -8,8 +8,8 @@ USE `java2` ;
 DROP TABLE IF EXISTS `user_state` ;
 
 CREATE TABLE IF NOT EXISTS `user_state` (
-  `id` CHAR(10) NOT NULL,
-  `text` CHAR(100) NOT NULL,
+  `id` VARCHAR(10) NOT NULL,
+  `text` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -17,21 +17,25 @@ DROP TABLE IF EXISTS `users` ;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `login` CHAR(32) NOT NULL,
-  `name` CHAR(100) NOT NULL,
-  `email` CHAR(100) NOT NULL,
-  `state_idref` CHAR(10) NOT NULL,
+  `login` VARCHAR(32) NOT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `state_idref` VARCHAR(10) NOT NULL,
   `created_date` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY (`login`),
   FOREIGN KEY (`state_idref`) REFERENCES `user_state`(`id`)
-);
+)
+
+ENGINE = InnoDB
+AUTO_INCREMENT = 1000;
 
 DROP TABLE IF EXISTS `announcement_state` ;
 
 CREATE TABLE IF NOT EXISTS `announcement_state` (
-  `id` CHAR(10) NOT NULL,
-  `text` CHAR(100) NOT NULL,
+  `id` VARCHAR(10) NOT NULL,
+  `text` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
@@ -39,10 +43,10 @@ DROP TABLE IF EXISTS `announcements` ;
 
 CREATE TABLE IF NOT EXISTS `announcements` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `title` CHAR(32) NOT NULL,
-  `description` CHAR(100) NOT NULL,
+  `title` VARCHAR(32) NOT NULL,
+  `description` VARCHAR(100) NOT NULL,
   `user_idref` INT(11) NOT NULL,
-  `state_idref` CHAR(10) NOT NULL,
+  `state_idref` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`user_idref`) REFERENCES `users`(`id`),
   FOREIGN KEY (`state_idref`) REFERENCES `announcement_state`(`id`)

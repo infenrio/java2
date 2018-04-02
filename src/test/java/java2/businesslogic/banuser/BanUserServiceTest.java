@@ -6,7 +6,11 @@ import java2.database.UserDatabase;
 import java2.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +19,13 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BanUserServiceTest {
-    private UserDatabase userDatabase;
-    private BanUserValidator validator;
-    private BanUserService service;
+    @Mock private UserDatabase userDatabase;
+    @Mock private BanUserValidator validator;
 
-    @Before
-    public void init() {
-        userDatabase = Mockito.mock(UserDatabase.class);
-        validator = Mockito.mock(BanUserValidator.class);
-        service = new BanUserService(userDatabase, validator);
-    }
+    @InjectMocks
+    private BanUserService service = new BanUserService();
 
     @Test
     public void shouldReturnSuccess() {
@@ -47,8 +47,6 @@ public class BanUserServiceTest {
         errors.add(new ValidationError("field", "ValidationError message"));
         Mockito.when(validator.validate(null)).
                 thenReturn(errors);
-        Mockito.when(userDatabase.findByLogin("login")).
-                thenReturn(Optional.empty());
         ServiceResponse response = service.banUser(null);
         assertEquals(response.isSuccess(), false);
         assertEquals(response.getErrors(), errors);

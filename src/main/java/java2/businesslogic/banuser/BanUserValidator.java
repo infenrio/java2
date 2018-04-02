@@ -13,11 +13,7 @@ import java.util.Optional;
 
 @Component
 public class BanUserValidator {
-    private UserDatabase userDatabase;
-
-    public BanUserValidator(UserDatabase userDatabase) {
-        this.userDatabase = userDatabase;
-    }
+    @Autowired private UserDatabase userDatabase;
 
     public List<ValidationError> validate(String login) {
         List<ValidationError> errors = new ArrayList<>();

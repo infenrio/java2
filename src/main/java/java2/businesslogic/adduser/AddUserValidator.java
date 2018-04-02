@@ -3,6 +3,7 @@ package java2.businesslogic.adduser;
 import java2.businesslogic.ValidationError;
 import java2.database.UserDatabase;
 import java2.models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -11,18 +12,15 @@ import java.util.Optional;
 
 @Component
 public class AddUserValidator {
-    private UserDatabase userDatabase;
+    @Autowired private UserDatabase userDatabase;
 
-    public AddUserValidator(UserDatabase userDatabase) {
-        this.userDatabase = userDatabase;
-    }
-
-    public List<ValidationError> validate(String login, String name, String email) {
+    public List<ValidationError> validate(String login, String password, String name, String email) {
         List<ValidationError> errors = new ArrayList<>();
         Optional<ValidationError> emptyLoginError = validateLogin(login);
         emptyLoginError.ifPresent(error -> errors.add(error));
         Optional<ValidationError> emptyEmailError = validateEmail(email);
         emptyEmailError.ifPresent(error -> errors.add(error));
+        validatePassword(password).ifPresent(error -> errors.add(error));
         validateName(name).ifPresent(error -> errors.add(error));
         if(!emptyLoginError.isPresent()) {
             validateDuplicateLogin(login).ifPresent(errors::add);
@@ -36,6 +34,14 @@ public class AddUserValidator {
     private Optional<ValidationError> validateLogin(String login) {
         if(login == null || login.isEmpty()) {
             return Optional.of(new ValidationError("login", "Must not be empty!"));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+    private Optional<ValidationError> validatePassword(String password) {
+        if(password == null || password.isEmpty()) {
+            return Optional.of(new ValidationError("password", "Must not be empty!"));
         } else {
             return Optional.empty();
         }

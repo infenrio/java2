@@ -5,34 +5,43 @@ import java2.database.UserDatabase;
 import java2.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AddUserValidatorTest {
-    private UserDatabase userDatabase;
-    private AddUserValidator validator;
+    @Mock private UserDatabase userDatabase;
 
-    @Before
-    public void init() {
-        userDatabase = Mockito.mock(UserDatabase.class);
-        validator = new AddUserValidator(userDatabase);
-    }
+    @InjectMocks
+    private AddUserValidator validator = new AddUserValidator();
 
     @Test
     public void shouldReturnErrorWhenLoginIsEmpty() {
-        List<ValidationError> errors = validator.validate(null, "name", "email");
+        List<ValidationError> errors = validator.validate(null, "password", "name", "email");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "login");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be empty!");
     }
 
     @Test
+    public void shouldReturnErrorWhenPasswordIsEmpty() {
+        List<ValidationError> errors = validator.validate("login", null, "name", "email");
+        assertEquals(errors.size(), 1);
+        assertEquals(errors.get(0).getField(), "password");
+        assertEquals(errors.get(0).getErrorMessage(), "Must not be empty!");
+    }
+
+    @Test
     public void shouldReturnErrorWhenNameIsEmpty() {
-        List<ValidationError> errors = validator.validate("login", null, "email");
+        List<ValidationError> errors = validator.validate("login", "password", null, "email");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "name");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be empty!");
@@ -40,7 +49,7 @@ public class AddUserValidatorTest {
 
     @Test
     public void shouldReturnErrorWhenEmailIsEmpty() {
-        List<ValidationError> errors = validator.validate("login", "name", null);
+        List<ValidationError> errors = validator.validate("login", "password", "name", null);
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "email");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be empty!");
@@ -53,7 +62,7 @@ public class AddUserValidatorTest {
                 thenReturn(Optional.of(user));
         Mockito.when(userDatabase.findByEmail("email")).
                 thenReturn(Optional.empty());
-        List<ValidationError> errors = validator.validate("login", "name", "email");
+        List<ValidationError> errors = validator.validate("login", "password", "name", "email");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "login");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated!");
@@ -66,7 +75,7 @@ public class AddUserValidatorTest {
                 thenReturn(Optional.empty());
         Mockito.when(userDatabase.findByEmail("email")).
                 thenReturn(Optional.of(user));
-        List<ValidationError> errors = validator.validate("login", "name", "email");
+        List<ValidationError> errors = validator.validate("login", "password", "name", "email");
         assertEquals(errors.size(), 1);
         assertEquals(errors.get(0).getField(), "email");
         assertEquals(errors.get(0).getErrorMessage(), "Must not be repeated!");
@@ -78,7 +87,7 @@ public class AddUserValidatorTest {
                 thenReturn(Optional.empty());
         Mockito.when(userDatabase.findByEmail("email")).
                 thenReturn(Optional.empty());
-        List<ValidationError> errors = validator.validate("login", "name", "email");
+        List<ValidationError> errors = validator.validate("login", "password", "name", "email");
         assertEquals(errors.size(), 0);
     }
 

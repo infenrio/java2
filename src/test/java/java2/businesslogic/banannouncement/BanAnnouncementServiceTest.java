@@ -6,7 +6,11 @@ import java2.database.AnnouncementDatabase;
 import java2.models.Announcement;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,17 +19,13 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BanAnnouncementServiceTest {
-    private AnnouncementDatabase announcementDatabase;
-    private BanAnnouncementValidator validator;
-    private BanAnnouncementService service;
+    @Mock private AnnouncementDatabase announcementDatabase;
+    @Mock private BanAnnouncementValidator validator;
 
-    @Before
-    public void init() {
-        announcementDatabase = Mockito.mock(AnnouncementDatabase.class);
-        validator = Mockito.mock(BanAnnouncementValidator.class);
-        service = new BanAnnouncementService(announcementDatabase, validator);
-    }
+    @InjectMocks
+    private BanAnnouncementService service = new BanAnnouncementService();
 
     @Test
     public void shouldReturnSuccess() {
@@ -47,8 +47,6 @@ public class BanAnnouncementServiceTest {
         errors.add(new ValidationError("field", "ValidationError message"));
         Mockito.when(validator.validate(null, "title")).
                 thenReturn(errors);
-        Mockito.when(announcementDatabase.findByTitle("title")).
-                thenReturn(Optional.empty());
         ServiceResponse response = service.banAnnouncement(null, "title");
         assertEquals(response.isSuccess(), false);
         assertEquals(response.getErrors(), errors);

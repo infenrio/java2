@@ -8,7 +8,11 @@ import java2.models.Announcement;
 import java2.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,19 +21,14 @@ import java.util.Optional;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@RunWith(MockitoJUnitRunner.class)
 public class AddAnnouncementServiceTest {
-    private AnnouncementDatabase announcementDatabase;
-    private UserDatabase userDatabase;
-    private AddAnnouncementValidator validator;
-    private AddAnnouncementService service;
+    @Mock private AnnouncementDatabase announcementDatabase;
+    @Mock private UserDatabase userDatabase;
+    @Mock private AddAnnouncementValidator validator;
 
-    @Before
-    public void init() {
-        announcementDatabase = Mockito.mock(AnnouncementDatabase.class);
-        userDatabase = Mockito.mock(UserDatabase.class);
-        validator = Mockito.mock(AddAnnouncementValidator.class);
-        service = new AddAnnouncementService(announcementDatabase, userDatabase, validator);
-    }
+    @InjectMocks
+    private AddAnnouncementService service = new AddAnnouncementService();
 
     @Test
     public void shouldReturnSuccess() {
@@ -49,11 +48,6 @@ public class AddAnnouncementServiceTest {
     public void shouldReturnFail() {
         List<ValidationError> errors = new ArrayList<>();
         errors.add(new ValidationError("field", "ValidationError message"));
-        User user = Mockito.mock(User.class);
-        Mockito.when(announcementDatabase.findByTitle("title")).
-                thenReturn(Optional.empty());
-        Mockito.when(userDatabase.findByLogin("login")).
-                thenReturn(Optional.of(user));
         Mockito.when(validator.validate(null, "title", "description")).
                 thenReturn(errors);
         ServiceResponse response = service.addAnnouncement(null, "title", "description");

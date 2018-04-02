@@ -6,22 +6,23 @@ import java2.models.User;
 import java2.models.UserState;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BanUserValidatorTest {
-    private UserDatabase userDatabase;
-    private BanUserValidator validator;
+    @Mock private UserDatabase userDatabase;
 
-    @Before
-    public void init() {
-        userDatabase = Mockito.mock(UserDatabase.class);
-        validator = new BanUserValidator(userDatabase);
-    }
+    @InjectMocks
+    private BanUserValidator validator = new BanUserValidator();
 
     @Test
     public void shouldReturnErrorWhenLoginIsEmpty() {

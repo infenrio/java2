@@ -19,11 +19,13 @@ public class AddUserView implements View {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter login:");
         String login = sc.nextLine();
+        System.out.print("Enter password:");
+        String password = sc.nextLine();
         System.out.print("Enter name:");
         String name = sc.nextLine();
         System.out.print("Enter email:");
         String email = sc.nextLine();
-        ServiceResponse response = addUserService.addUser(login, name, email);
+        ServiceResponse response = addUserService.addUser(login, password, name, email);
         if(response.isSuccess()) {
             System.out.println("User '" + login + "' successfully registered!");
         } else {

@@ -7,22 +7,23 @@ import java2.models.AnnouncementState;
 import java2.models.User;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
+@RunWith(MockitoJUnitRunner.class)
 public class BanAnnouncementValidatorTest {
-    private AnnouncementDatabase announcementDatabase;
-    private BanAnnouncementValidator validator;
+    @Mock private AnnouncementDatabase announcementDatabase;
 
-    @Before
-    public void init() {
-        announcementDatabase = Mockito.mock(AnnouncementDatabase.class);
-        validator = new BanAnnouncementValidator(announcementDatabase);
-    }
+    @InjectMocks
+    private BanAnnouncementValidator validator = new BanAnnouncementValidator();
 
     @Test
     public void shouldReturnErrorWhenLoginIsEmpty() {

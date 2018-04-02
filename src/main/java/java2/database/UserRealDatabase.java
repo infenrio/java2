@@ -11,20 +11,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class UserRealDatabase extends JDBCDatabase implements UserDatabase {
     @Override
     public void add(User user) {
         Connection connection = null;
         try {
             connection = getConnection();
-            String sql = "insert into USERS(id, login, name, email, state_idref) values(default, ?, ?, ?, ?)";
+            String sql = "insert into USERS(id, login, password, name, email, state_idref) values(default, ?, ?, ?, ?, ?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getLogin());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getState());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getEmail());
+            preparedStatement.setString(5, user.getState());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -156,6 +157,7 @@ public class UserRealDatabase extends JDBCDatabase implements UserDatabase {
         try {
             user.setId(resultSet.getInt("id"));
             user.setLogin(resultSet.getString("login"));
+            user.setPassword(resultSet.getString("password"));
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
             user.setState(resultSet.getString("state_idref"));

@@ -36,10 +36,10 @@ public class JDBCDatabase {
         try {
             properties.load(JDBCDatabase.class.getClassLoader().getResourceAsStream(DB_CONFIG_FILE));
 
-            jdbcUrl = properties.getProperty("jdbcUrl");
+            jdbcUrl = properties.getProperty("jdbc.url");
             driverClass = properties.getProperty("driverClass");
-            userName = properties.getProperty("userName");
-            password = properties.getProperty("password");
+            userName = properties.getProperty("database.user.name");
+            password = properties.getProperty("database.user.password");
         } catch (IOException e){
             System.out.println("Exception while reading JDBC configuration from file = " + DB_CONFIG_FILE);
             e.printStackTrace();

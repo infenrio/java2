@@ -13,6 +13,7 @@ public class UserRealDatabaseTest {
     public void shouldAddUserToDatabase() {
         User user = new User();
         user.setLogin("login");
+        user.setPassword("password");
         user.setName("name");
         user.setEmail("email");
         user.setState("ACTIVE");
