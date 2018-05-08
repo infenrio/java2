@@ -1,7 +1,7 @@
 package java2.database;
 
 import java2.configs.SpringAppConfig;
-import java2.models.User;
+import java2.domain.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class UserORMDatabaseTest {
         user.setPassword("password");
         user.setName("name");
         user.setEmail("email");
-        user.setState("ACTIVE");
+//        user.setState("ACTIVE");
 
         assertEquals(user.getId(), 0);
 

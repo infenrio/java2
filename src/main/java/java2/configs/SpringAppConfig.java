@@ -12,6 +12,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -19,6 +20,7 @@ import java.util.Properties;
 @Configuration
 @ComponentScan(basePackages = {"java2"})
 @PropertySource("classpath:database.properties")
+@EnableTransactionManagement
 public class SpringAppConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -51,6 +53,7 @@ public class SpringAppConfig {
         properties.put("hibernate.show_sql", showSql);
         properties.put("hibernate.format_sql", formatSql);
         properties.put("hibernate.hbm2ddl.auto", hbm2ddl);
+        properties.put("hibernate.id.new_generator_mappings","false");
 
         return properties;
     }

@@ -1,7 +1,6 @@
 package java2.database;
 
-import java2.models.User;
-import org.springframework.stereotype.Component;
+import java2.domain.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +17,13 @@ public class UserRealDatabase extends JDBCDatabase implements UserDatabase {
         Connection connection = null;
         try {
             connection = getConnection();
-            String sql = "insert into USERS(id, login, password, name, email, state_idref) values(default, ?, ?, ?, ?, ?)";
+            String sql = "insert into USERS(id, login, password, name, email, state_idref) values(default, ?, ?, ?, ?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getName());
             preparedStatement.setString(4, user.getEmail());
-            preparedStatement.setString(5, user.getState());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -160,7 +158,6 @@ public class UserRealDatabase extends JDBCDatabase implements UserDatabase {
             user.setPassword(resultSet.getString("password"));
             user.setName(resultSet.getString("name"));
             user.setEmail(resultSet.getString("email"));
-            user.setState(resultSet.getString("state_idref"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

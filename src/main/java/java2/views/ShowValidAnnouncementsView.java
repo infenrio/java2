@@ -1,18 +1,19 @@
 package java2.views;
 
 import java2.database.AnnouncementDatabase;
-import java2.models.Announcement;
+import java2.database.AnnouncementRepository;
+import java2.domain.Announcement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ShowValidAnnouncementsView implements View {
-    @Autowired private AnnouncementDatabase announcementDatabase;
+    @Autowired private AnnouncementRepository announcementRepository;
 
     @Override
     public void execute() {
         System.out.println("Valid announcements:");
-        for (Announcement announcement : announcementDatabase.getValidAnnouncements()) {
+        for (Announcement announcement : announcementRepository.getValidAnnouncements()) {
             System.out.println(announcement);
         }
     }

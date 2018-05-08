@@ -1,7 +1,7 @@
 package java2.database;
 
-import java2.models.Announcement;
-import java2.models.User;
+import java2.domain.Announcement;
+import java2.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class AnnouncementORMDatabase implements AnnouncementDatabase {
     @Autowired private SessionFactory sessionFactory;
 

@@ -1,9 +1,10 @@
 package java2.views;
 
 import java2.businesslogic.ServiceResponse;
-import java2.businesslogic.banuser.BanUserService;
-import java2.businesslogic.banuser.BanUserValidator;
-import java2.database.UserDatabase;
+import java2.businesslogic.userban.BanUserService;
+import java2.businesslogic.userban.UserBanRequest;
+import java2.businesslogic.userban.UserBanResponse;
+import java2.businesslogic.userban.UserBanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 @Component
 public class BanUserView implements View {
-    @Autowired private BanUserService banUserService;
+    @Autowired private UserBanService userBanService;
 
     @Override
     public void execute() {
@@ -19,7 +20,8 @@ public class BanUserView implements View {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter login:");
         String login = sc.nextLine();
-        ServiceResponse response = banUserService.banUser(login);
+        UserBanRequest request = new UserBanRequest(login);
+        UserBanResponse response = userBanService.ban(request);
         if(response.isSuccess()) {
             System.out.println("User '" + login + "' successfully banned!");
         } else {

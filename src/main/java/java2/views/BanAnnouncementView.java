@@ -1,9 +1,10 @@
 package java2.views;
 
 import java2.businesslogic.ServiceResponse;
-import java2.businesslogic.banannouncement.BanAnnouncementService;
-import java2.businesslogic.banannouncement.BanAnnouncementValidator;
-import java2.database.AnnouncementDatabase;
+import java2.businesslogic.announcementban.AnnouncementBanRequest;
+import java2.businesslogic.announcementban.AnnouncementBanResponse;
+import java2.businesslogic.announcementban.AnnouncementBanService;
+import java2.businesslogic.announcementban.BanAnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
 
 @Component
 public class BanAnnouncementView implements View {
-    @Autowired private BanAnnouncementService banAnnouncementService;
+    @Autowired private AnnouncementBanService announcementBanService;
 
     @Override
     public void execute() {
@@ -21,7 +22,8 @@ public class BanAnnouncementView implements View {
         String login = sc.nextLine();
         System.out.print("Enter title:");
         String title = sc.nextLine();
-        ServiceResponse response = banAnnouncementService.banAnnouncement(login, title);
+        AnnouncementBanRequest request = new AnnouncementBanRequest(login, title);
+        AnnouncementBanResponse response = announcementBanService.ban(request);
         if(response.isSuccess()) {
             System.out.println("Announcement successfully banned!");
         } else {

@@ -1,6 +1,6 @@
 package java2.database;
 
-import java2.models.User;
+import java2.domain.User;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -16,7 +16,7 @@ public class UserRealDatabaseTest {
         user.setPassword("password");
         user.setName("name");
         user.setEmail("email");
-        user.setState("ACTIVE");
+//        user.setState("ACTIVE");
 
         database.add(user);
 

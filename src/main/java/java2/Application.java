@@ -23,7 +23,8 @@ public class Application {
         actionMap.put(5, applicationContext.getBean(BanAnnouncementView.class));
         actionMap.put(6, applicationContext.getBean(BanUserView.class));
         actionMap.put(7, applicationContext.getBean(ShowValidAnnouncementsView.class));
-        actionMap.put(8, applicationContext.getBean(ProgramExitView.class));
+        actionMap.put(8, applicationContext.getBean(ShowAnnouncementCategoryView.class));
+        actionMap.put(9, applicationContext.getBean(ProgramExitView.class));
 
         while (true) {
             printProgramMenu();
@@ -42,7 +43,8 @@ public class Application {
         System.out.println("5. Ban announcement.");
         System.out.println("6. Ban user.");
         System.out.println("7. Show only valid announcements.");
-        System.out.println("8. Exit program.");
+        System.out.println("8. Show all announcements of specific category.");
+        System.out.println("9. Exit program.");
     }
 
     private static int getFromUserMenuItemToExecute() {

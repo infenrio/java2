@@ -1,20 +1,27 @@
 package java2.database;
 
-import java2.models.User;
+import java2.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+//@Component
 public class UserORMDatabase implements UserDatabase {
     @Autowired private SessionFactory sessionFactory;
 
     private Session session() {
         return sessionFactory.getCurrentSession();
+    }
+
+    private CriteriaBuilder criteriaBuilder() {
+        return session().getCriteriaBuilder();
     }
 
     @Override
@@ -38,8 +45,11 @@ public class UserORMDatabase implements UserDatabase {
     }
 
     @Override
+    @Transactional
     public List<User> getAllUsers() {
-        return null;
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder().createQuery(User.class);
+        criteriaQuery.from(User.class);
+        return session().createQuery(criteriaQuery).getResultList();
     }
 
     @Override

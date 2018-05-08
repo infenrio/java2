@@ -1,8 +1,7 @@
 package java2.database;
 
-import java2.models.Announcement;
-import java2.models.User;
-import org.springframework.stereotype.Component;
+import java2.domain.Announcement;
+import java2.domain.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,13 +24,12 @@ public class AnnouncementRealDatabase extends JDBCDatabase implements Announceme
         Connection connection = null;
         try {
             connection = getConnection();
-            String sql = "insert into ANNOUNCEMENTS(id, title, description, user_idref, state_idref) values(default, ?, ?, ?, ?)";
+            String sql = "insert into ANNOUNCEMENTS(id, title, description, user_idref, state_idref) values(default, ?, ?, ?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, announcement.getTitle());
             preparedStatement.setString(2, announcement.getDescription());
             preparedStatement.setInt(3, announcement.getCreator().getId());
-            preparedStatement.setString(4, announcement.getState());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -170,7 +168,6 @@ public class AnnouncementRealDatabase extends JDBCDatabase implements Announceme
             announcement.setDescription(resultSet.getString("description"));
             int creatorId = resultSet.getInt("user_idref");
             announcement.setCreator(userDatabase.findById(creatorId).get());
-            announcement.setState(resultSet.getString("state_idref"));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,6 @@
 package java2.database;
 
-import java2.models.User;
+import java2.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class UserInMemoryDatabase implements UserDatabase {
 
     @Override
     public void banUser(User user) {
-        user.ban();
+
     }
 
 
