@@ -1,7 +1,6 @@
 package java2.businesslogic.userban;
 
 import java2.businesslogic.ValidationError;
-import java2.businesslogic.userregistration.UserRegistrationResponse;
 import java2.database.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -37,7 +37,7 @@ public class UserBanValidatorImpl implements UserBanValidator {
     }
 
     private Optional<ValidationError> validateUserPresence(String login) {
-        Optional<User> userFound = userRepository.findByLogin(login);
+        Optional<User> userFound = userRepository.findByLoginAndRole(login, 'U');
         if(!userFound.isPresent()) {
             return Optional.of(new ValidationError("login", "User not found!"));
         } else {
@@ -46,9 +46,9 @@ public class UserBanValidatorImpl implements UserBanValidator {
     }
 
     private Optional<ValidationError> validateUserAlreadyBanned(String login) {
-        Optional<User> userFound = userRepository.findByLogin(login);
+        Optional<User> userFound = userRepository.findByLoginAndRole(login, 'U');
         if(userFound.isPresent()) {
-            if(userFound.get().getState().equals("BANNED")) {
+            if(userFound.get().getState().getId().equals("BANNED")) {
                 return Optional.of(new ValidationError("login", "User already banned!"));
             } else {
                 return Optional.empty();

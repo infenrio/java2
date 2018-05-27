@@ -20,9 +20,9 @@ public class BanAnnouncementView implements View {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter login:");
         String login = sc.nextLine();
-        System.out.print("Enter title:");
-        String title = sc.nextLine();
-        AnnouncementBanRequest request = new AnnouncementBanRequest(login, title);
+        System.out.print("Enter id:");
+        int id = sc.nextInt();
+        AnnouncementBanRequest request = new AnnouncementBanRequest(login, id);
         AnnouncementBanResponse response = announcementBanService.ban(request);
         if(response.isSuccess()) {
             System.out.println("Announcement successfully banned!");

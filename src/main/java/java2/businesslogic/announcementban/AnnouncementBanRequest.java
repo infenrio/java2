@@ -2,11 +2,11 @@ package java2.businesslogic.announcementban;
 
 public class AnnouncementBanRequest {
     private String login;
-    private String title;
+    private int id;
 
-    public AnnouncementBanRequest(String login, String title) {
+    public AnnouncementBanRequest(String login, int id) {
         this.login = login;
-        this.title = title;
+        this.id = id;
     }
 
     public String getLogin() {
@@ -17,11 +17,11 @@ public class AnnouncementBanRequest {
         this.login = login;
     }
 
-    public String getTitle() {
-        return title;
+    public int getId() {
+        return id;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setId(int id) {
+        this.id = id;
     }
 }

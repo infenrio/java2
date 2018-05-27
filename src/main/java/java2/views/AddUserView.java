@@ -1,10 +1,8 @@
 package java2.views;
 
-import java2.businesslogic.ServiceResponse;
-import java2.businesslogic.userregistration.AddUserService;
-import java2.businesslogic.userregistration.UserRegistrationRequest;
-import java2.businesslogic.userregistration.UserRegistrationResponse;
-import java2.businesslogic.userregistration.UserRegistrationService;
+import java2.businesslogic.registration.RegistrationRequest;
+import java2.businesslogic.registration.RegistrationResponse;
+import java2.businesslogic.registration.userregistration.UserRegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +24,8 @@ public class AddUserView implements View {
         String name = sc.nextLine();
         System.out.print("Enter email:");
         String email = sc.nextLine();
-        UserRegistrationRequest request = new UserRegistrationRequest(login, password, name, email);
-        UserRegistrationResponse response = userRegistrationService.register(request);
+        RegistrationRequest request = new RegistrationRequest(login, password, name, email);
+        RegistrationResponse response = userRegistrationService.register(request);
         if(response.isSuccess()) {
             System.out.println("User '" + login + "' successfully registered! Id = " + response.getUserId());
         } else {

@@ -21,11 +21,11 @@ public class AnnouncementBanResponse {
         this.errors = errors;
     }
 
-    public int getUserId() {
+    public int getAnnouncementId() {
         return announcementId;
     }
 
-    public void setUserId(int announcementId) {
+    public void setAnnouncementId(int announcementId) {
         this.announcementId = announcementId;
     }
 

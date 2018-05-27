@@ -110,6 +110,15 @@ INSERT INTO `term` VALUES (1011, "Category for different types of items", "Kateg
 INSERT INTO `term` VALUES (1012, "Services", "Pakalpojumi", "Услуги");
 INSERT INTO `term` VALUES (1013, "Category for different types of services", "Kategorija dažādiem pakalpojumu tipiem", "Категория для разных типов услуг");
 
+INSERT INTO `term` VALUES (1014, "Transport", "Transports", "Транспорт");
+INSERT INTO `term` VALUES (1015, "Category for different types of transport", "Kategorija dažādiem transporta tipiem", "Категория для разных типов транспорта");
+
+INSERT INTO `term` VALUES (1016, "Help", "Palīdzība", "Помощь");
+INSERT INTO `term` VALUES (1017, "Category for different types of help", "Kategorija dažādiem palīdzības tipiem", "Категория для разных типов помощи");
+
+INSERT INTO `term` VALUES (1018, "Friendship", "Draudzība", "Дружба");
+INSERT INTO `term` VALUES (1019, "Category for different types of friendship", "Kategorija dažādiem draudzības tipiem", "Категория для разных типов дружбы");
+
 
 INSERT INTO `user_state` VALUES ("ACTIVE", 1000, 1002);
 INSERT INTO `user_state` VALUES ("BANNED", 1001, 1003);
@@ -120,6 +129,11 @@ INSERT INTO `announcement_state` VALUES ("BANNED", 1006, 1009);
 
 INSERT INTO `announcement_category` (`id`, `title_term_idref`, `description_term_idref`) VALUES (1000, 1010, 1011);
 INSERT INTO `announcement_category` (`id`, `title_term_idref`, `description_term_idref`) VALUES (1001, 1012, 1013);
+INSERT INTO `announcement_category` (`id`, `parent_category_idref`, `title_term_idref`, `description_term_idref`) VALUES (1002, 1000, 1014, 1015);
+INSERT INTO `announcement_category` (`id`, `parent_category_idref`, `title_term_idref`, `description_term_idref`) VALUES (1003, 1001, 1016, 1017);
+INSERT INTO `announcement_category` (`id`, `parent_category_idref`, `title_term_idref`, `description_term_idref`) VALUES (1004, 1001, 1018, 1019);
+
+INSERT INTO `users` (`login`, `password`, `role`, `name`, `email`, `state_idref`) VALUES ("admin", "admin", 'S', "admin", "admin@admin.com", "ACTIVE");
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

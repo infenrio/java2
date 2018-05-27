@@ -29,6 +29,27 @@ public class AnnouncementRepositoryImpl extends ORMRepository implements Announc
     }
 
     @Override
+    public void remove(Announcement announcement) {
+        session().delete(announcement);
+    }
+
+    @Override
+    @Transactional
+    public Optional<Announcement> findById(int id) {
+        CriteriaQuery<Announcement> criteriaQuery = criteriaBuilder().createQuery(Announcement.class);
+        Root<Announcement> root = criteriaQuery.from(Announcement.class);
+        criteriaQuery.select(root).where(criteriaBuilder().equal(root.get("id"), id));
+        Query<Announcement> q = session().createQuery(criteriaQuery);
+        Announcement announcement;
+        try {
+            announcement = q.getSingleResult();
+        } catch (NoResultException e) {
+            announcement = null;
+        }
+        return Optional.ofNullable(announcement);
+    }
+
+    @Override
     @Transactional
     public List<Announcement> findByCategory(int id) {
         CriteriaQuery<Announcement> criteriaQuery = criteriaBuilder().createQuery(Announcement.class);
@@ -52,18 +73,25 @@ public class AnnouncementRepositoryImpl extends ORMRepository implements Announc
     }
 
     @Override
-    public Optional<Announcement> findByTitle(String title) {
+    @Transactional
+    public List<Announcement> findByTitle(String title) {
         CriteriaQuery<Announcement> criteriaQuery = criteriaBuilder().createQuery(Announcement.class);
         Root<Announcement> root = criteriaQuery.from(Announcement.class);
-        criteriaQuery.select(root).where(criteriaBuilder().equal(root.get("title"), title));
+        criteriaQuery.select(root).where(criteriaBuilder().like(root.<String>get("title"), "%"+title+"%"));
         Query<Announcement> q = session().createQuery(criteriaQuery);
-        Announcement announcement;
-        try {
-            announcement = q.getSingleResult();
-        } catch (NoResultException nre){
-            announcement = null;
-        }
-        return Optional.ofNullable(announcement);
+        List<Announcement> announcements = q.getResultList();
+        return announcements;
+    }
+
+    @Override
+    @Transactional
+    public List<Announcement> findByDescription(String description) {
+        CriteriaQuery<Announcement> criteriaQuery = criteriaBuilder().createQuery(Announcement.class);
+        Root<Announcement> root = criteriaQuery.from(Announcement.class);
+        criteriaQuery.select(root).where(criteriaBuilder().like(root.<String>get("description"), "%"+description+"%"));
+        Query<Announcement> q = session().createQuery(criteriaQuery);
+        List<Announcement> announcements = q.getResultList();
+        return announcements;
     }
 
     @Override
@@ -95,13 +123,35 @@ public class AnnouncementRepositoryImpl extends ORMRepository implements Announc
     }
 
     @Override
-    public void banByTitle(String title) {
+    public void banById(int id) {
         AnnouncementState bannedState = announcementStateRepository.findById("BANNED").get();
 
         CriteriaUpdate<Announcement> criteriaUpdate = criteriaBuilder().createCriteriaUpdate(Announcement.class);
         Root<Announcement> root = criteriaUpdate.from(Announcement.class);
         criteriaUpdate.set("state", bannedState);
-        criteriaUpdate.where(criteriaBuilder().equal(root.get("title"), title));
+        criteriaUpdate.where(criteriaBuilder().equal(root.get("id"), id));
+
+        // perform update
+        session().createQuery(criteriaUpdate).executeUpdate();
+    }
+
+    @Override
+    public void changeTitle(int id, String title) {
+        CriteriaUpdate<Announcement> criteriaUpdate = criteriaBuilder().createCriteriaUpdate(Announcement.class);
+        Root<Announcement> root = criteriaUpdate.from(Announcement.class);
+        criteriaUpdate.set("title", title);
+        criteriaUpdate.where(criteriaBuilder().equal(root.get("id"), id));
+
+        // perform update
+        session().createQuery(criteriaUpdate).executeUpdate();
+    }
+
+    @Override
+    public void changeDescription(int id, String description) {
+        CriteriaUpdate<Announcement> criteriaUpdate = criteriaBuilder().createCriteriaUpdate(Announcement.class);
+        Root<Announcement> root = criteriaUpdate.from(Announcement.class);
+        criteriaUpdate.set("description", description);
+        criteriaUpdate.where(criteriaBuilder().equal(root.get("id"), id));
 
         // perform update
         session().createQuery(criteriaUpdate).executeUpdate();

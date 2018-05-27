@@ -21,7 +21,7 @@ public class AnnouncementBanServiceImpl implements AnnouncementBanService {
             return new AnnouncementBanResponse(validationErrors);
         }
 
-        announcementRepository.banByTitle(request.getTitle());
-        return new AnnouncementBanResponse(announcementRepository.findByTitle(request.getTitle()).get().getId());
+        announcementRepository.banById(request.getId());
+        return new AnnouncementBanResponse(request.getId());
     }
 }

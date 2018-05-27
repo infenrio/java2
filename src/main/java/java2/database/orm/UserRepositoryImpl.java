@@ -64,6 +64,40 @@ public class UserRepositoryImpl extends ORMRepository implements UserRepository 
     }
 
     @Override
+    public Optional<User> findByLoginAndRole(String login, char role) {
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder().createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root).where(criteriaBuilder().and(
+                criteriaBuilder().equal(root.get("login"), login),
+                criteriaBuilder().equal(root.get("role"), role)));
+        Query<User> q = session().createQuery(criteriaQuery);
+        User user;
+        try {
+            user = q.getSingleResult();
+        } catch (NoResultException nre){
+            user = null;
+        }
+        return Optional.ofNullable(user);
+    }
+
+    @Override
+    public Optional<User> findByLoginAndPassword(String login, String password) {
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder().createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root).where(criteriaBuilder().and(
+                criteriaBuilder().equal(root.get("login"), login),
+                criteriaBuilder().equal(root.get("password"), password)));
+        Query<User> q = session().createQuery(criteriaQuery);
+        User user;
+        try {
+            user = q.getSingleResult();
+        } catch (NoResultException nre){
+            user = null;
+        }
+        return Optional.ofNullable(user);
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         CriteriaQuery<User> criteriaQuery = criteriaBuilder().createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
