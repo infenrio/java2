@@ -62,6 +62,7 @@ public class AnnouncementRepositoryImpl extends ORMRepository implements Announc
     }
 
     @Override
+    @Transactional
     public List<Announcement> findByLogin(String login) {
         CriteriaQuery<Announcement> criteriaQuery = criteriaBuilder().createQuery(Announcement.class);
         Root<Announcement> root = criteriaQuery.from(Announcement.class);

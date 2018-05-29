@@ -1,5 +1,6 @@
 package java2.servlets.mvc;
 
+import java2.businesslogic.ValidationError;
 import java2.businesslogic.login.LoginRequest;
 import java2.businesslogic.login.LoginResponse;
 import java2.businesslogic.login.LoginService;
@@ -45,7 +46,7 @@ public class HelloWorldController {
         return new ModelAndView("helloWorld2", "model", "Hello from MVC2!");
     }
 
-    @RequestMapping(value = "login", method = {RequestMethod.GET})
+//    @RequestMapping(value = "userLogin", method = {RequestMethod.GET})
     public ModelAndView processGet(HttpServletRequest request) {
 
         String login = request.getParameter("login");
@@ -53,24 +54,28 @@ public class HelloWorldController {
 
         LoginResponse response = loginService.login(new LoginRequest(login, password,'U'));
 
-        return new ModelAndView("login", "model", response.getUserId());
+        return new ModelAndView("userLogin", "model", response);
     }
 
-    @RequestMapping(value = "login", method = {RequestMethod.POST})
+//    @RequestMapping(value = "userLogin", method = {RequestMethod.POST})
     public ModelAndView processPost(HttpServletRequest request) {
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
+        String htmlModel = "";
         LoginResponse response = loginService.login(new LoginRequest(login, password,'U'));
         if(response.isSuccess()) {
 //            return new ModelAndView("helloWorld2", "model",
 //                    "Logged in with id: " + response.getUserId());
 
-            return new ModelAndView("helloWorld2", "model",
+            return new ModelAndView("userLogin", "model",
                     response);
         }
+        for (ValidationError error: response.getErrors()) {
+            htmlModel += "<div>" + error.getField() + " - " + error.getErrorMessage() + "</div>";
+        }
 
-        return new ModelAndView("login", "model", response.getUserId());
+        return new ModelAndView("userLogin", "model", response);
     }
 }
