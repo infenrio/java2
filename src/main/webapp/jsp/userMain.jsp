@@ -18,13 +18,13 @@
 <h1>Welcome user!</h1>
 
 <div>
-<a href="userAnnouncements">Check your announcements</a>
+<a href="userAnnouncements" class="btn btn-info" style="margin-bottom:5px;">Check your announcements</a>
 </div>
 <div>
-<a href="announcementPickCategory?categoryId=0">Create announcement</a>
+<a href="announcementPickCategory?categoryId=0" class="btn btn-info" style="margin-bottom:5px;">Create announcement</a>
 </div>
 <div>
-<a href="logout">Logout</a>
+<a href="logout" class="btn btn-warning">Logout</a>
 </div>
 
 </body>

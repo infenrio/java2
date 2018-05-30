@@ -36,9 +36,9 @@
 <td><%= announcement.getCategory().getTitle().getTextEn() %></td>
 <td><%= announcement.getTitle() %></td>
 <td><%= announcement.getDescription() %></td>
-<td><%= "<a href=\"announcementEdit?id=" + announcement.getId() + "\">" %>
+<td><%= "<a class=\"btn btn-warning\" href=\"announcementEdit?id=" + announcement.getId() + "\">" %>
 Edit</a></td>
-<td><%= "<a href=\"announcementRemove?id=" + announcement.getId() + "\">" %>
+<td><%= "<a class=\"btn btn-danger\" href=\"announcementRemove?id=" + announcement.getId() + "\">" %>
 Remove</a></td>
 </tr>
 <% } %>
@@ -46,7 +46,7 @@ Remove</a></td>
 </table>
 <% } %>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="userMain" class="btn btn-success" style="margin-top:5px;">User home</a>
 <div>
 </body>
 </html>

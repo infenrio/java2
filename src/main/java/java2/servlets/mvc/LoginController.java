@@ -84,9 +84,14 @@ public class LoginController {
     public ModelAndView logout(HttpServletRequest request) {
         logger.info("logout GET called.");
         HttpSession session = request.getSession();
-        String role = session.getAttribute("role").toString();
+        String role = "";
+        try {
+            role = session.getAttribute("role").toString();
+        } catch (Exception e) {
+            logger.info(e.toString());
+        }
         session.invalidate();
-        if(role.equals("A")) {
+        if("A".equals(role) || "S".equals(role)) {
             return new ModelAndView("adminLogin", "model", null);
         } else {
             return new ModelAndView("userLogin", "model", null);

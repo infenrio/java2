@@ -34,9 +34,9 @@
 <tr>
 <td><%= category.getTitle().getTextEn() %></td>
 <td><%= category.getDescription().getTextEn() %></td>
-<td><%= "<a href=\"announcementCategories?categoryId=" + category.getId() + "\">" %>
+<td><%= "<a class=\"btn btn-info\" href=\"announcementCategories?categoryId=" + category.getId() + "\">" %>
 Subcategories</a></td>
-<td><%= "<a href=\"announcementList?categoryId=" + category.getId() + "\">" %>
+<td><%= "<a class=\"btn btn-success\" href=\"announcementList?categoryId=" + category.getId() + "\">" %>
 Show announcements</a></td>
 </tr>
 <% } %>
@@ -44,7 +44,7 @@ Show announcements</a></td>
 </table>
 <% } %>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="/java2" class="btn btn-success" style="margin-top:5px;">Home page</a>
 <div>
 </body>
 </html>

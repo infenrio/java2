@@ -22,7 +22,8 @@
 <% AnnouncementCreationResponse announcementResponse = (AnnouncementCreationResponse) model.get("response"); %>
 <% if(announcementResponse != null) { %>
 <% if(announcementResponse.isSuccess()) { %>
-<div><p class = "text-success">Announcement created successfully!</p></div>
+<div><p class = "text-success">Announcement created successfully!</p>
+<a href="userAnnouncements">Check your announcements</a></div>
 <% } else { %>
 <% for(ValidationError error : announcementResponse.getErrors()) { %>
 <div><p class = "text-danger">
@@ -56,14 +57,14 @@
 </div>
 <div class="control-group">
 <div class="controls">
-<input type="submit" value="Create announcement!" />
+<input type="submit" value="Create announcement!" class="btn btn-primary" />
 </div>
 </div>
 </fieldset>
 </form>
 </div>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="userMain" class="btn btn-success" style="margin-top:5px;">User home</a>
 <div>
 </body>
 </html>

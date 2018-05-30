@@ -18,13 +18,13 @@
 <h1>Welcome admin!</h1>
 
 <div>
-<a href="adminAnnouncements">Manage announcements</a>
+<a href="adminAnnouncements" class="btn btn-info" style="margin-bottom:5px;">Manage announcements</a>
 </div>
 <div>
-<a href="adminUsers">Manage users</a>
+<a href="adminUsers" class="btn btn-info" style="margin-bottom:5px;">Manage users</a>
 </div>
 <div>
-<a href="logout">Logout</a>
+<a href="logout" class="btn btn-warning">Logout</a>
 </div>
 
 </body>

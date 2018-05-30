@@ -59,12 +59,14 @@
 </div>
 <div class="control-group">
 <div class="controls">
-<input type="submit" value="Register!" />
+<input type="submit" value="Register!" class="btn btn-primary" />
 </div>
 </div>
 </fieldset>
 </form>
 </div>
-
+<div>
+<a href="logout" class="btn btn-warning" style="margin-top:5px;">Logout</a>
+</div>
 </body>
 </html>

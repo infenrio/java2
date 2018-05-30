@@ -16,16 +16,16 @@
 <h1>Home page!</h1>
 
 <div>
-<a href="userLogin">Login</a>
+<a href="userLogin" class="btn btn-info" style="margin-bottom:5px;">Login</a>
 </div>
 <div>
-<a href="adminLogin">Admin login</a>
+<a href="adminLogin" class="btn btn-info" style="margin-bottom:5px;">Admin login</a>
 </div>
 <div>
-<a href="userRegistration">Register</a>
+<a href="userRegistration" class="btn btn-info" style="margin-bottom:5px;">Register</a>
 </div>
 <div>
-<a href="announcementCategories?categoryId=0">Announcements</a>
+<a href="announcementCategories?categoryId=0" class="btn btn-info">Announcements</a>
 </div>
 
 

@@ -45,7 +45,7 @@
 </table>
 <% } %>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="announcementCategories?categoryId=0" class="btn btn-success" style="margin-top:5px;">Go Back</a>
 <div>
 </body>
 </html>

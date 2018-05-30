@@ -60,14 +60,14 @@
 </div>
 <div class="control-group">
 <div class="controls">
-<input type="submit" value="Edit announcement!" />
+<input type="submit" value="Edit announcement!" class="btn btn-primary" />
 </div>
 </div>
 </fieldset>
 </form>
 </div>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="userMain" class="btn btn-success" style="margin-top:5px;">User home</a>
 <div>
 </body>
 </html>

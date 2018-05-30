@@ -59,14 +59,14 @@
 </div>
 <div class="control-group">
 <div class="controls">
-<input type="submit" value="Register!" />
+<input type="submit" value="Register!" class="btn btn-primary" />
 </div>
 </div>
 </fieldset>
 </form>
 </div>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="/java2" class="btn btn-success" style="margin-top:5px;">Home page</a>
 <div>
 </body>
 </html>

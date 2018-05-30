@@ -38,7 +38,7 @@
 <td><%= announcement.getDescription() %></td>
 <td><%= announcement.getState().getTitle().getTextEn() %></td>
 <td>
-<%= "<a href=\"adminAnnouncements?login=" + announcement.getCreator().getLogin() + "&id=" + announcement.getId() + "\">" %>
+<%= "<a class=\"btn btn-danger\" href=\"adminAnnouncements?login=" + announcement.getCreator().getLogin() + "&id=" + announcement.getId() + "\">" %>
 Ban announcement</a>
 </td>
 </tr>
@@ -47,7 +47,7 @@ Ban announcement</a>
 </table>
 <% } %>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="adminMain" class="btn btn-success" style="margin-top:5px;">Admin home</a>
 <div>
 </body>
 </html>

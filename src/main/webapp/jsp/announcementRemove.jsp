@@ -69,7 +69,7 @@
 </div>
 <% } %>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="userMain" class="btn btn-success" style="margin-top:5px;">User home</a>
 <div>
 </body>
 </html>

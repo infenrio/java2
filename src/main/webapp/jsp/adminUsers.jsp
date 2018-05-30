@@ -47,7 +47,7 @@ Ban user</a>
 </table>
 <% } %>
 <div>
-<a href="javascript:history.back()">Go Back</a>
+<a href="adminMain" class="btn btn-success" style="margin-top:5px;">Admin home</a>
 <div>
 </body>
 </html>
