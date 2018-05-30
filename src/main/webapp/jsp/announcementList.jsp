@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>User registration page</title>
+    <title>Announcements</title>
      <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -20,12 +20,29 @@
 
 <% List<Announcement> model = (List<Announcement>) request.getAttribute("model"); %>
 <% if(model != null) { %>
+<table class="table table-stripped">
+<thead>
+<tr>
+<th scope="col">Creator</th>
+<th scope="col">Title</th>
+<th scope="col">Description</th>
+<th scope="col">E-mail</th>
+</tr>
+</thead>
+<tbody>
 <% for(Announcement announcement : model) { %>
-<div>
-<h3><%= announcement.getTitle() %></h3>
-<p><%= announcement.getDescription() %></p>
-</div>
+<tr>
+<td><%= announcement.getCreator().getName() %></td>
+<td><%= announcement.getTitle() %></td>
+<td><%= announcement.getDescription() %></td>
+<td>
+<%= "<a href=\"mailto:" + announcement.getCreator().getEmail() + "\">" %>
+<%= announcement.getCreator().getEmail() %>
+</a></td>
+</tr>
 <% } %>
+</tbody>
+</table>
 <% } %>
 <div>
 <a href="javascript:history.back()">Go Back</a>

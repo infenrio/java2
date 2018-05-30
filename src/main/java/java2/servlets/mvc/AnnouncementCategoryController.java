@@ -20,7 +20,7 @@ public class AnnouncementCategoryController {
     @Autowired private AnnouncementCategoryRepository announcementCategoryRepository;
 
     @RequestMapping(value = "announcementCategories", method = {RequestMethod.GET})
-    public ModelAndView userLoginGet(HttpServletRequest request) {
+    public ModelAndView announcementCategoriesGet(HttpServletRequest request) {
         logger.info("announcementCategories GET called.");
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         List<AnnouncementCategory> categories =

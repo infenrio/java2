@@ -14,7 +14,7 @@ public class HomeController {
     private static Logger logger = Logger.getLogger(HomeController.class.getName());
 
     @RequestMapping(value = "/", method = {RequestMethod.GET})
-    public ModelAndView userLoginGet(HttpServletRequest request) {
+    public ModelAndView homeGet(HttpServletRequest request) {
         logger.info("/ GET called.");
         HttpSession session = request.getSession();
         session.invalidate();

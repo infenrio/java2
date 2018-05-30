@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import = "java2.businesslogic.login.LoginResponse" %>
+<%@ page import = "java2.businesslogic.registration.RegistrationResponse" %>
 <%@ page import = "java2.businesslogic.ValidationError" %>
 <html>
 <head>
-    <title>Admin login page</title>
+    <title>Admin registration page</title>
      <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -15,19 +15,23 @@
     </head>
 <body>
 
-<h1>Admin login page!</h1>
+<h1>Admin registration page!</h1>
 
-<% LoginResponse model = (LoginResponse) request.getAttribute("model"); %>
+<% RegistrationResponse model = (RegistrationResponse) request.getAttribute("model"); %>
 <% if(model != null) { %>
-<%  for(ValidationError error : model.getErrors()) { %>
+<% if(model.isSuccess()) { %>
+<div><p class = "text-success">Registration is successful!</p></div>
+<% } else { %>
+<% for(ValidationError error : model.getErrors()) { %>
 <div><p class = "text-danger">
 <%=  error.getField() + " - " + error.getErrorMessage() %>
 </p></div>
 <% } %>
 <% } %>
+<% } %>
 
 <div class="container">
-<form class="form-horizontal" name="loginForm" method="post" action="adminLogin">
+<form class="form-horizontal" name="registrationForm" method="post" action="adminRegistration">
 <fieldset>
 <div class="control-group">
 <label class="control-label"  for="login">Login:</label>
@@ -42,15 +46,25 @@
 </div>
 </div>
 <div class="control-group">
+<label class="control-label"  for="name">Name:</label>
 <div class="controls">
-<input type="submit" value="Login!" />
+     <input class="input-xlarge" type="text" name="name" path="name"/>
+</div>
+</div>
+<div class="control-group">
+<label class="control-label"  for="email">E-mail:</label>
+<div class="controls">
+     <input class="input-xlarge" type="text" name="email" path="email"/>
+</div>
+</div>
+<div class="control-group">
+<div class="controls">
+<input type="submit" value="Register!" />
 </div>
 </div>
 </fieldset>
 </form>
 </div>
-<div>
-<a href="javascript:history.back()">Go Back</a>
-<div>
+
 </body>
 </html>

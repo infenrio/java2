@@ -2,7 +2,6 @@ package java2.servlets.mvc;
 
 import java2.database.AnnouncementRepository;
 import java2.domain.Announcement;
-import java2.domain.AnnouncementCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,7 @@ public class AnnouncementListController {
     @Autowired private AnnouncementRepository announcementRepository;
 
     @RequestMapping(value = "announcementList", method = {RequestMethod.GET})
-    public ModelAndView userLoginGet(HttpServletRequest request) {
+    public ModelAndView announcementListGet(HttpServletRequest request) {
         logger.info("announcementList GET called.");
         int categoryId = Integer.parseInt(request.getParameter("categoryId"));
         List<Announcement> announcements =

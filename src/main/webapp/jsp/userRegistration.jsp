@@ -65,6 +65,8 @@
 </fieldset>
 </form>
 </div>
-
+<div>
+<a href="javascript:history.back()">Go Back</a>
+<div>
 </body>
 </html>

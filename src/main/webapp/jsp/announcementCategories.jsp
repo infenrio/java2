@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>User registration page</title>
+    <title>Announcement categories</title>
      <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -20,15 +20,28 @@
 
 <% List<AnnouncementCategory> model = (List<AnnouncementCategory>) request.getAttribute("model"); %>
 <% if(model != null) { %>
+<table class="table table-stripped">
+<thead>
+<tr>
+<th scope="col">Title</th>
+<th scope="col">Description</th>
+<th scope="col">Subcategories</th>
+<th scope="col">Announcements</th>
+</tr>
+</thead>
+<tbody>
 <% for(AnnouncementCategory category : model) { %>
-<div><p>
-<%= "<a href=\"announcementCategories?categoryId=" + category.getId() + "\">" %>
-<%= category.getTitle().getTextEn() %></a>
-(<%= category.getDescription().getTextEn() %>)
-<%= "<a href=\"announcementList?categoryId=" + category.getId() + "\">" %>
-Show announcements of category</a>
-</p></div>
+<tr>
+<td><%= category.getTitle().getTextEn() %></td>
+<td><%= category.getDescription().getTextEn() %></td>
+<td><%= "<a href=\"announcementCategories?categoryId=" + category.getId() + "\">" %>
+Subcategories</a></td>
+<td><%= "<a href=\"announcementList?categoryId=" + category.getId() + "\">" %>
+Show announcements</a></td>
+</tr>
 <% } %>
+</tbody>
+</table>
 <% } %>
 <div>
 <a href="javascript:history.back()">Go Back</a>

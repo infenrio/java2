@@ -121,7 +121,7 @@ public class UserRepositoryImpl extends ORMRepository implements UserRepository 
     public List<User> getAllUsers() {
         CriteriaQuery<User> criteriaQuery = criteriaBuilder().createQuery(User.class);
         Root<User> root = criteriaQuery.from(User.class);
-        criteriaQuery.select(root);
+        criteriaQuery.select(root).where(criteriaBuilder().equal(root.get("role"), 'U'));
         Query<User> q = session().createQuery(criteriaQuery);
         List<User> users = q.getResultList();
         return users;

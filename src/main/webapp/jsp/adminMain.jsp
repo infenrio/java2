@@ -15,9 +15,17 @@
     </head>
 <body>
 
-<h1>Admin is authorized!</h1>
+<h1>Welcome admin!</h1>
 
+<div>
+<a href="adminAnnouncements">Manage announcements</a>
+</div>
+<div>
+<a href="adminUsers">Manage users</a>
+</div>
+<div>
 <a href="logout">Logout</a>
+</div>
 
 </body>
 </html>

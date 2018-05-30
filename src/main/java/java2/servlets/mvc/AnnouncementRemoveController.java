@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 @Controller
 public class AnnouncementRemoveController {
-    private static Logger logger = Logger.getLogger(AnnouncementEditController.class.getName());
+    private static Logger logger = Logger.getLogger(AnnouncementRemoveController.class.getName());
 
     @Autowired private AnnouncementRepository announcementRepository;
     @Autowired private AnnouncementRemovalService announcementRemovalService;

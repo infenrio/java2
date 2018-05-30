@@ -15,7 +15,7 @@
     </head>
 <body>
 
-<h1>User is authorized!</h1>
+<h1>Welcome user!</h1>
 
 <div>
 <a href="userAnnouncements">Check your announcements</a>

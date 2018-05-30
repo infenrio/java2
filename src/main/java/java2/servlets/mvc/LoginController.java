@@ -59,14 +59,23 @@ public class LoginController {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        LoginResponse response = loginService.login(new LoginRequest(login, password,'A'));
+        LoginResponse response;
+        response = loginService.login(new LoginRequest(login, password,'S'));
         if(response.isSuccess()) {
             HttpSession session = request.getSession( );
             session.setAttribute("userId", response.getUserId());
             session.setAttribute("role", response.getRole());
             session.setAttribute("login", login);
-            return new ModelAndView("adminMain", "model", response);
+            return new ModelAndView("adminRegistration", "model", null);
         } else {
+            response = loginService.login(new LoginRequest(login, password,'A'));
+            if(response.isSuccess()) {
+                HttpSession session = request.getSession( );
+                session.setAttribute("userId", response.getUserId());
+                session.setAttribute("role", response.getRole());
+                session.setAttribute("login", login);
+                return new ModelAndView("adminMain", "model", response);
+            }
             return new ModelAndView("adminLogin", "model", response);
         }
     }

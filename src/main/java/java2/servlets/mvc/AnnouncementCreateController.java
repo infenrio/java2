@@ -26,7 +26,7 @@ public class AnnouncementCreateController {
     @Autowired private AnnouncementCreationService announcementCreationService;
 
     @RequestMapping(value = "announcementPickCategory", method = {RequestMethod.GET})
-    public ModelAndView announcementPickCategory(HttpServletRequest request) {
+    public ModelAndView announcementPickCategoryGet(HttpServletRequest request) {
         logger.info("announcementPickCategory GET called.");
         HttpSession session = request.getSession();
         if(!session.getAttribute("role").toString().equals("U")) {

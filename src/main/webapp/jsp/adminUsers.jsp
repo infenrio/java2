@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import = "java2.domain.Announcement" %>
+<%@ page import = "java2.domain.User" %>
 <%@ page import = "java.util.List" %>
 
 <html>
 <head>
-    <title>Announcements of user</title>
+    <title>Users</title>
      <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -16,30 +16,31 @@
     </head>
 <body>
 
-<h1>Announcements of user!</h1>
+<h1>Users!</h1>
 
-<% List<Announcement> model = (List<Announcement>) request.getAttribute("model"); %>
+<% List<User> model = (List<User>) request.getAttribute("model"); %>
 <% if(model != null) { %>
 <table class="table table-stripped">
 <thead>
 <tr>
-<th scope="col">Category</th>
-<th scope="col">Title</th>
-<th scope="col">Description</th>
-<th scope="col">Edit</th>
-<th scope="col">Remove</th>
+<th scope="col">Login</th>
+<th scope="col">Name</th>
+<th scope="col">Email</th>
+<th scope="col">Status</th>
+<th scope="col">Action</th>
 </tr>
 </thead>
 <tbody>
-<% for(Announcement announcement : model) { %>
+<% for(User user : model) { %>
 <tr>
-<td><%= announcement.getCategory().getTitle().getTextEn() %></td>
-<td><%= announcement.getTitle() %></td>
-<td><%= announcement.getDescription() %></td>
-<td><%= "<a href=\"announcementEdit?id=" + announcement.getId() + "\">" %>
-Edit</a></td>
-<td><%= "<a href=\"announcementRemove?id=" + announcement.getId() + "\">" %>
-Remove</a></td>
+<td><%= user.getLogin() %></td>
+<td><%= user.getName() %></td>
+<td><%= user.getEmail() %></td>
+<td><%= user.getState().getTitle().getTextEn() %></td>
+<td>
+<%= "<a href=\"adminUsers?login=" + user.getLogin() + "\">" %>
+Ban user</a>
+</td>
 </tr>
 <% } %>
 </tbody>
