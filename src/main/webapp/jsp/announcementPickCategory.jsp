@@ -25,6 +25,10 @@
 <tr>
 <th scope="col">Title</th>
 <th scope="col">Description</th>
+<th scope="col">Vīrsraksts</th>
+<th scope="col">Apraksts</th>
+<th scope="col">Заголовок</th>
+<th scope="col">Описание</th>
 <th scope="col">Check subcategories</th>
 <th scope="col">Create announcement</th>
 </tr>
@@ -34,6 +38,10 @@
 <tr>
 <td><%= category.getTitle().getTextEn() %></td>
 <td><%= category.getDescription().getTextEn() %></td>
+<td><%= category.getTitle().getTextLv() %></td>
+<td><%= category.getDescription().getTextLv() %></td>
+<td><%= category.getTitle().getTextRu() %></td>
+<td><%= category.getDescription().getTextRu() %></td>
 <td><%= "<a class=\"btn btn-info\" href=\"announcementPickCategory?categoryId=" + category.getId() + "\">" %>
 Check subcategories</a></td>
 <td><%= "<a class=\"btn btn-success\" href=\"announcementCreate?categoryId=" + category.getId() + "\">" %>
